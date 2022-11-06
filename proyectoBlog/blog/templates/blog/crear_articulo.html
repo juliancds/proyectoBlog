@@ -1,0 +1,10 @@
+{% if articulo.errors %}
+<p style="color: red;"> Error: alguno de los datos ingresados es incorrecto, revisar</p> 
+{% endif %}
+
+<form action="" method="POST">{% csrf_token %}
+    <table>
+        {{ articulo.as_table }}
+    </table>
+    <input type="submit" value="Publicar articulo!">
+</form>

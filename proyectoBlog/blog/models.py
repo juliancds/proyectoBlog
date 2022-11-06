@@ -5,6 +5,9 @@ from datetime import datetime
 
 
 class modelBlog(models.Model):
+    class Meta:
+        verbose_name_plural = "Articulos"
+
     id = models.AutoField(primary_key=True)
     titulo = models.CharField(max_length=70)
     subtitulo = models.CharField(max_length=280)
@@ -12,7 +15,7 @@ class modelBlog(models.Model):
     contenido = models.CharField(max_length=1120)
     autor = models.CharField(max_length=70)
     fecha = models.DateField(default=datetime.now)
-    imagen = models.ImageField(upload_to="pictures", null=True, blank=True)
+    # imagen = models.ImageField(upload_to="pictures", null=True, blank=True)
 
     def __str__(self):
-        return f"{self.titulo} by {self.autor}"
+        return f"{self.titulo} ({self.autor})"
