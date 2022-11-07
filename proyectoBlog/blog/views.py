@@ -12,8 +12,31 @@ from django.views.generic import (
 # Create your views here.
 
 
-def inicio(request):
-    pass
+def mostrar_inicio(request):
+    articulos = modelBlog.object.all()
+    contexto = {"articulos": articulos}
+    return render(request, "blog/inicio.html", contexto)
+
+
+class ArticulosList(ListView):
+    model = modelBlog
+    template_name = "blog/articulos.html"
+
+
+class ArticuloDetalle(DetailView):
+    model = modelBlog
+    template_name = "blog/articulo_detalle.html"
+
+
+class ArticuloEditar(UpdateView):
+    model = modelBlog
+    success_url = "/blog/mis_articulos"
+    fields = ["titulo", "subtitulo", "seccion", "contenido", "autor", "fecha"]
+
+
+class ArticuloBorrar(DeleteView):
+    model = modelBlog
+    success_url = "/blog/mis_articulos"
 
 
 def crear_articulo(request):

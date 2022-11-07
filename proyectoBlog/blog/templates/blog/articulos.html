@@ -1,0 +1,17 @@
+
+<h1> Mis articulos </h1>
+<ul>
+    {% for articulo in object_list %}
+    
+    <li>
+
+        <p>{{ articulo.titulo }} escrito por {{ articulo.autor }}</p>
+        <p>
+            <a href="{% url 'mi_articulo_detalle' articulo.id %}">Ver articulo</a>
+            <a href="{% url 'mi_articulo_editar' articulo.id %}">Editar</a>
+            <a href="{% url 'mi_articulo_borrar' articulo.id %}">Borrar</a>
+        </p>
+        
+    </li>
+    {% endfor %}
+</ul>
