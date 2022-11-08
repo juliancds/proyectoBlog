@@ -1,9 +1,12 @@
 {% extends "blog/padre.html" %}
 {% block inserte_aqui_su_contenido %}
+<p><a href="{% url 'Iniciobase' %}">Volver a Inicio</a></p>
 <h1> Mis articulos </h1>
+
 {% if mensaje %}
 Bienvenido {{ mensaje }}!
 {% endif %}
+
 <ul>
     {% for articulo in object_list %}
     
@@ -15,7 +18,7 @@ Bienvenido {{ mensaje }}!
             <a href="{% url 'mi_articulo_editar' articulo.id %}">Editar</a>
             <a href="{% url 'mi_articulo_borrar' articulo.id %}">Borrar</a>
         </p>
-        
+
     </li>
     {% endfor %}
 </ul>

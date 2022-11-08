@@ -6,6 +6,7 @@ from blog.views import (
     ArticuloDetalle,
     ArticuloEditar,
     ArticuloBorrar,
+    mostrar_inicio,
 )
 
 urlpatterns = [
@@ -14,4 +15,5 @@ urlpatterns = [
     path("r'(?P<pk>\d+)^$'", ArticuloDetalle.as_view(), name="mi_articulo_detalle"),
     path("editar/<pk>", ArticuloEditar.as_view(), name="mi_articulo_editar"),
     path("borrar/<pk>", ArticuloBorrar.as_view(), name="mi_articulo_borrar"),
+    path("inicio", mostrar_inicio, name="Inicioblog"),
 ]

@@ -7,17 +7,19 @@ from django.views.generic import (
     UpdateView,
     DeleteView,
 )
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
 
 def mostrar_inicio(request):
-    articulos = modelBlog.object.all()
-    contexto = {"articulos": articulos}
+    variable = modelBlog.objects.all()
+    contexto = {"llave": variable}
     return render(request, "blog/inicio.html", contexto)
 
 
-class ArticulosList(ListView):
+class ArticulosList(LoginRequiredMixin, ListView):
     model = modelBlog
     template_name = "blog/articulos.html"
 
@@ -27,17 +29,18 @@ class ArticuloDetalle(DetailView):
     template_name = "blog/articulo_detalle.html"
 
 
-class ArticuloEditar(UpdateView):
+class ArticuloEditar(LoginRequiredMixin, UpdateView):
     model = modelBlog
     success_url = "/blog/mis_articulos"
     fields = ["titulo", "subtitulo", "seccion", "contenido", "autor", "fecha"]
 
 
-class ArticuloBorrar(DeleteView):
+class ArticuloBorrar(LoginRequiredMixin, DeleteView):
     model = modelBlog
     success_url = "/blog/mis_articulos"
 
 
+@login_required()
 def crear_articulo(request):
     if request.method != "POST":
         mi_articulo = modelBlogForm()

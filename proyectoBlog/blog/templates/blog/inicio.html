@@ -1,9 +1,19 @@
+{% extends "blog/padre.html" %}
+{% block inserte_aqui_su_contenido %}
+
+{% if request.user.is_authenticated %}
+<p><a href="{% url 'mis_articulos' %}">Mis Articulos</a></p>
+{% endif %}
+
 Hola bienvenido al inicio
 <br>
 <br>
-Articulos
+<br>
+Articulos:
 <br>
 <br>
-{% for modelblog in articulos %}
-{{ modelblog.titulo }}  (autor: {{ modelblog.autor }} ) <br>
+{% for art in llave %}
+{{ art.titulo }}  (autor: {{ art.autor }} ) <br>
 {% endfor %}
+
+{% endblock %}

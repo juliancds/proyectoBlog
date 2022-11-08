@@ -1,5 +1,22 @@
+{% if request.user.is_authenticated %}
 <p><a href="{% url 'nuevo_articulo' %}">Escribir Articulo</a></p>
+{% endif %}
+
+{% if not request.user.is_authenticated %}
 <p><a href="{% url 'Login' %}">Iniciar Sesion</a></p>
+{% endif %}
+
+{% if request.user.is_authenticated %}
 <p><a href="{% url 'Logout' %}">Cerrar Sesion</a></p>
+{% endif %}
+
+{% if not request.user.is_authenticated %}
+<p><a href="{% url 'Register' %}">Registrarme</a></p>
+{% endif %}
+
+{% if request.user.is_authenticated %}
+<p><a href="{% url 'EditarPerfil' %}">Editar mi perfil</a></p>
+{% endif %}
+
 {% block inserte_aqui_su_contenido %}
 {% endblock %}
