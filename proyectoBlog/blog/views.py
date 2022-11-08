@@ -9,13 +9,19 @@ from django.views.generic import (
 )
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
+from accounts.models import Avatar
 
 # Create your views here.
 
 
 def mostrar_inicio(request):
+    avatar = Avatar.objects.filter(user=request.user).first()
+    if avatar is not None:
+        contexto = {"avatar": avatar.imagen.url}
+    else:
+        contexto = {}
     variable = modelBlog.objects.all()
-    contexto = {"llave": variable}
+    contexto = {"avatar": avatar.imagen.url, "llave": variable}
     return render(request, "blog/inicio.html", contexto)
 
 

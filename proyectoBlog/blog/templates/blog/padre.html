@@ -18,5 +18,15 @@
 <p><a href="{% url 'EditarPerfil' %}">Editar mi perfil</a></p>
 {% endif %}
 
+{% if request.user.is_authenticated %}
+<p><a href="{% url 'AgregarAvatar' %}">Agregar foto de perfil</a></p>
+{% if avatar %}
+<img height="40px" src="{{ avatar }}"/>
+{% endif %}
+<p> Hola, {{ user.username }} !!</p>
+{% endif %}
+
+<br>
+<br>
 {% block inserte_aqui_su_contenido %}
 {% endblock %}

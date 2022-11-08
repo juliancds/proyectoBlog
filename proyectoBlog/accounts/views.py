@@ -78,5 +78,20 @@ def editar_perfil(request):
             user.save()
             return render(request, "blog/inicio.html")
 
-    contexto = {"user": user, "form": form}
-    return render(request, "accounts/editarPerfil.html", contexto)
+    contexto = {"user": user, "form": form, "avatar": avatar.imagen.url}
+    return render(request, "blog/inicio.html", {"avatar": avatar.imagen.url})
+
+
+@login_required
+def agregar_avatar(request):
+    if request.method != "POST":
+        form = AvatarForm()
+    else:
+        form = AvatarForm(request.POST, request.FILES)
+        if form.is_valid():
+            Avatar.objects.filter(user=request.user).delete()
+            form.save()
+            return render(request, "blog/inicio.html")
+
+    contexto = {"form": form}
+    return render(request, "accounts/avatar_form.html", contexto)
